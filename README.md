@@ -16,9 +16,40 @@ Or install it yourself as:
 
     $ gem install key_value_logging
 
-## Usage
+## Environment specific configuration
 
-TODO: Write usage instructions here
+Add tag to all requests:
+
+    # By referencing a request object method
+    config.key_value_logging.tags = { uuid: :uuid }
+
+    # By providing a proc
+    config.key_value_logging.tags = { params: ->(request){ request.filtered_params } }
+
+    # By providing flat data
+    config.key_value_logging.tags = { mydata: 'Fixed string' }
+
+By default the key value tags are rendered like ```key=value```. But you may
+need to preprocess them. In order to make your life easier, you can access all
+data as a hash by setting the raw format option. The log message itself will be
+available at the ```:message``` key:
+
+    config.key_value_logging.format = :raw
+
+Especially in combination with the raw format option, it makes sense to set your
+own formatter. This could post-process the raw tags and data. As we extend the
+logger and formatter, we provide an easy way to set yout own formatter while
+taking advantage of the custom key-value behaviour:
+
+    config.key_value_logging.formatter = YourCustomLogFormatter.new
+
+## In-app usage
+
+Like the default rails TaggedLogging logger, you can tag log messages with this
+logger. The syntax is almost the same. But instead of providing flat strings, you
+now provide a hash with key and value:
+
+    logger.tagged(city: 'Cologne', country: 'Cologne') { logger.info 'made with love' }
 
 ## Contributing
 
