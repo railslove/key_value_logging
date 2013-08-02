@@ -9,9 +9,11 @@ module KeyValueLogging
 
     # Add custom logging middleware, after the logger is initialized
     initializer "key_value_logging_railtie.configure_rails_initialization", after: :initialize_logger do |app|
-      # Apply monkey patch to BufferedLogger to allow to set a formatter
-      require 'formatted_rails_logger'
-      FormattedRailsLogger.patch_rails
+      if defined?(ActiveSupport::BufferedLogger)
+        # Apply monkey patch to BufferedLogger to allow to set a formatter
+        require 'formatted_rails_logger'
+        FormattedRailsLogger.patch_rails
+      end
 
       logger = Rails.logger
 
