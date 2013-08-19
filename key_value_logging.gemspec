@@ -6,6 +6,7 @@ require 'key_value_logging/version'
 Gem::Specification.new do |gem|
   gem.name          = "key_value_logging"
   gem.version       = KeyValueLogging::VERSION
+  gem.license       = 'MIT'
   gem.authors       = ["Maximilian Schulz"]
   gem.email         = ["m.schulz@kulturfluss.de"]
   gem.description   = %q{KeyValue based replacement for rails TaggedLogging}
