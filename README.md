@@ -1,6 +1,8 @@
 # KeyValueLogging
 
-TODO: Write a gem description
+Replacement for the Rails TaggedLogging using key-value pairs instead of flat tags. 
+This allows you to add more data to your log output. 
+
 
 ## Installation
 
